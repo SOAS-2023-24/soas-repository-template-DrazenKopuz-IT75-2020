@@ -1,10 +1,11 @@
 package api.services;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import api.dto.CurrencyExchangeDto;
+import org.springframework.web.bind.annotation.RequestParam;
 
 public interface CurrencyExchangeService {
+
 	@GetMapping("/currency-exchange")
-	CurrencyExchangeDto getExchange();
+	ResponseEntity<?> getExchange(@RequestParam String from, @RequestParam String to);
 }

@@ -9,13 +9,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "currency-exchange")
-public class CurrencyExchangeModel implements Serializable{
+@Table(name = "currency_exchange")
+public class CurrencyExchangeModel implements Serializable {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	private int id;
 	@Column(name = "exchange_from", length = 3)
@@ -23,10 +24,11 @@ public class CurrencyExchangeModel implements Serializable{
 	@Column(name = "exchange_to", length = 3)
 	private String to;
 	private BigDecimal exchangeValue;
+
 	public CurrencyExchangeModel() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
+
 	public CurrencyExchangeModel(int id, String from, String to, BigDecimal exchangeValue) {
 		super();
 		this.id = id;
@@ -34,35 +36,37 @@ public class CurrencyExchangeModel implements Serializable{
 		this.to = to;
 		this.exchangeValue = exchangeValue;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getFrom() {
 		return from;
 	}
+
 	public void setFrom(String from) {
 		this.from = from;
 	}
+
 	public String getTo() {
 		return to;
 	}
+
 	public void setTo(String to) {
 		this.to = to;
 	}
+
 	public BigDecimal getExchangeValue() {
 		return exchangeValue;
 	}
+
 	public void setExchangeValue(BigDecimal exchangeValue) {
 		this.exchangeValue = exchangeValue;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
-	
-	
+
 }

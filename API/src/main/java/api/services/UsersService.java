@@ -31,7 +31,7 @@ public interface UsersService {
 	@DeleteMapping("/users/deleteUser/email")
 	ResponseEntity<?> deleteUserByEmail(String email);
 	
-	@DeleteMapping("/users/deleteUser/email")
+	@DeleteMapping("/users/deleteAdmin/email")
 	ResponseEntity<?> deleteAdminByEmail(String email);
 	
 	

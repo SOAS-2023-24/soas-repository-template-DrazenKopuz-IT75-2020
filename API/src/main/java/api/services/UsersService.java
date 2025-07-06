@@ -27,6 +27,9 @@ public interface UsersService {
 	
 	@PutMapping("/users/updateAdmin")
 	ResponseEntity<?> updateAdmin(@RequestBody UserDto dto);
+	
+	@PutMapping("/users/updateOwner")
+	ResponseEntity<?> updateOwner(@RequestBody UserDto dto);
 
 	@DeleteMapping("/users/deleteUser/email")
 	ResponseEntity<?> deleteUserByEmail(String email);

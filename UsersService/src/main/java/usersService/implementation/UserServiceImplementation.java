@@ -60,12 +60,22 @@ public class UserServiceImplementation implements UsersService {
 	
 	@Override
     public ResponseEntity<?> updateAdmin(UserDto dto) {
-        UserModel admin = repo.findByEmail(dto.getEmail());
-        if (admin != null && admin.getRole().equals("ADMIN")) {
-            repo.updateUser(dto.getEmail(), dto.getPassword(), dto.getRole());
+        UserModel user = repo.findByEmail(dto.getEmail());
+        if (user != null && user.getRole().equals("ADMIN")) {
+            repo.updateAdmin(dto.getEmail(), dto.getPassword(), dto.getRole());
             return ResponseEntity.status(200).body(dto);
         }
         return ResponseEntity.status(404).body("Admin not found or is not an ADMIN");
+    }
+	
+	@Override
+    public ResponseEntity<?> updateOwner(UserDto dto) {
+        UserModel user = repo.findByEmail(dto.getEmail());
+        if (user != null && user.getRole().equals("OWNER")) {
+            repo.updateOwner(dto.getEmail(), dto.getPassword(), dto.getRole());
+            return ResponseEntity.status(200).body(dto);
+        }
+        return ResponseEntity.status(404).body("Owner not found or is not an OWNER");
     }
 	
 	  @Override

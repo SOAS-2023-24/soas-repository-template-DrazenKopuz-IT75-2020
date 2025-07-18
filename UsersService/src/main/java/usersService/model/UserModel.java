@@ -20,7 +20,7 @@ public class UserModel {
 	private String password;
 	
 	@Column(nullable = false, 
-			columnDefinition = "VARCHAR(10) CHECK (role in ('ADMIN', 'USER', 'OWNER'))")
+			columnDefinition = "VARCHAR(10) CHECK (role in ('ADMIN', 'USER'))")
 	private String role;
 
 	public UserModel() {

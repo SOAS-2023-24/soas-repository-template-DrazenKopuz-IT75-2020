@@ -15,19 +15,4 @@ public interface UsersServiceRepository extends JpaRepository<UserModel, Integer
 	@Transactional
 	@Query("update UserModel u set u.password = ?2, u.role = ?3 where u.email = ?1")
 	void updateUser(String email, String password, String role);
-	
-	@Modifying
-	@Transactional
-	@Query("update UserModel u set u.password = ?2, u.role = ?3 where u.email = ?1")
-	void updateAdmin(String email, String password, String role);
-	
-	@Modifying
-	@Transactional
-	@Query("update UserModel u set u.password = ?2, u.role = ?3 where u.email = ?1")
-	void updateOwner(String email, String password, String role);
-	
-	@Modifying
-	@Transactional
-	//@Query("DELETE FROM UserModel u WHERE u.email = ?1")
-	void deleteByEmail(String email);
 }

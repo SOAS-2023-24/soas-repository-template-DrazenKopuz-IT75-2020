@@ -49,54 +49,13 @@ public class UserServiceImplementation implements UsersService {
 	}
 
 	@Override
-    public ResponseEntity<?> updateUser(UserDto dto) {
-        UserModel user = repo.findByEmail(dto.getEmail());
-        if (user != null && user.getRole().equals("USER")) {
-            repo.updateUser(dto.getEmail(), dto.getPassword(), dto.getRole());
-            return ResponseEntity.status(200).body(dto);
-        }
-        return ResponseEntity.status(404).body("User not found or is not a USER");
-    }
-	
-	@Override
-    public ResponseEntity<?> updateAdmin(UserDto dto) {
-        UserModel user = repo.findByEmail(dto.getEmail());
-        if (user != null && user.getRole().equals("ADMIN")) {
-            repo.updateAdmin(dto.getEmail(), dto.getPassword(), dto.getRole());
-            return ResponseEntity.status(200).body(dto);
-        }
-        return ResponseEntity.status(404).body("Admin not found or is not an ADMIN");
-    }
-	
-	@Override
-    public ResponseEntity<?> updateOwner(UserDto dto) {
-        UserModel user = repo.findByEmail(dto.getEmail());
-        if (user != null && user.getRole().equals("OWNER")) {
-            repo.updateOwner(dto.getEmail(), dto.getPassword(), dto.getRole());
-            return ResponseEntity.status(200).body(dto);
-        }
-        return ResponseEntity.status(404).body("Owner not found or is not an OWNER");
-    }
-	
-	  @Override
-	    public ResponseEntity<?> deleteUserByEmail(String email) {
-	        UserModel user = repo.findByEmail(email);        
-	        if (user != null && user.getRole().equals("USER")) {
-	        	repo.deleteByEmail(email);
-	        	return ResponseEntity.status(200).body("User deleted successfully");
-	        }
-	        return ResponseEntity.status(404).body("User not found or is not a USER");
-	    }
-	  
-	  @Override
-	    public ResponseEntity<?> deleteAdminByEmail(String email) {
-	        UserModel user = repo.findByEmail(email);        
-	        if (user != null && user.getRole().equals("ADMIN")) {
-	        	repo.deleteByEmail(email);
-	        	return ResponseEntity.status(200).body("Admin deleted successfully");
-	        }
-	        return ResponseEntity.status(404).body("Admin not found or is not a Admin");
-	    }
+	public ResponseEntity<?> updateUser(UserDto dto) {
+		if(repo.findByEmail(dto.getEmail()) != null) {
+			repo.updateUser(dto.getEmail(), dto.getPassword(), dto.getRole());
+			return ResponseEntity.status(200).body(dto);
+		}
+		return ResponseEntity.status(404).body("User with forwarded email does not exist");
+	}
 	
 	public UserModel convertDtoToModel(UserDto dto) {
 		return new UserModel(dto.getEmail(), dto.getPassword(), dto.getRole());

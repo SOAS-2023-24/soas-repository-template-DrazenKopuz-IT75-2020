@@ -30,18 +30,10 @@ public class ApiGatewayAuthentication {
 		http
 		.csrf(csrf -> csrf.disable())
 		.authorizeExchange(exchange -> exchange
-				
-				//Existing routes
-				.pathMatchers("/currency-exchange").hasAnyRole("USER", "ADMIN", "OWNER")
-	            .pathMatchers("/currency-conversion").hasRole("USER")
-	            .pathMatchers(HttpMethod.GET, "/users").hasAnyRole("ADMIN", "OWNER")
-	            .pathMatchers(HttpMethod.POST, "/users/newUser").hasAnyRole("ADMIN", "OWNER")
-	            .pathMatchers(HttpMethod.PUT, "/users/updateUser/**").hasAnyRole("ADMIN", "OWNER")
-	            .pathMatchers(HttpMethod.DELETE, "/users/deleteUser/**").hasAnyRole("ADMIN", "OWNER")
-	            .pathMatchers(HttpMethod.POST, "/users/newAdmin").hasRole("OWNER")
-	            .pathMatchers(HttpMethod.PUT, "/users/updateAdmin/**").hasRole("OWNER")
-	            .pathMatchers(HttpMethod.DELETE, "/users/deleteAdmin/**").hasRole("OWNER")
-	            .pathMatchers(HttpMethod.PUT, "/users/updateOwner/**").hasRole("OWNER")
+				.pathMatchers(HttpMethod.POST).hasRole("ADMIN")
+				.pathMatchers("/currency-exchange").permitAll()
+				.pathMatchers("/currency-conversion").hasRole("USER")
+				.pathMatchers("/users").hasRole("ADMIN")
 				).httpBasic(Customizer.withDefaults());
 		
 		return http.build();
@@ -53,7 +45,7 @@ public class ApiGatewayAuthentication {
 				//Obratiti paznju prilikom rada sa Dockerom
 				// Bez dockera localhost:8770/users
 				// Za docker users-service:8770/users
-				new RestTemplate().exchange("http://localhost:8770/users", HttpMethod.GET,
+				new RestTemplate().exchange("http://users-service:8770/users", HttpMethod.GET,
 						null, new ParameterizedTypeReference<List<UserDto>>() {});
 		List<UserDetails> users = new ArrayList<UserDetails>();
 		for(UserDto user : response.getBody()) {

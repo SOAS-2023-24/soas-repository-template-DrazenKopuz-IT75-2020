@@ -11,26 +11,29 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "currency_exchange")
 public class CurrencyExchangeModel implements Serializable {
-
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	private int id;
-	@Column(name = "exchange_from", length = 3)
+	
+	@Column(name = "currency_from", length = 3)
 	private String from;
-	@Column(name = "exchange_to", length = 3)
+	
+	@Column(name = "currency_to", length = 3)
 	private String to;
+	
+	@Column(precision = 30, scale = 8)
 	private BigDecimal exchangeValue;
-
+	
 	public CurrencyExchangeModel() {
-		super();
+		
 	}
 
 	public CurrencyExchangeModel(int id, String from, String to, BigDecimal exchangeValue) {
-		super();
 		this.id = id;
 		this.from = from;
 		this.to = to;
@@ -65,8 +68,10 @@ public class CurrencyExchangeModel implements Serializable {
 		return exchangeValue;
 	}
 
-	public void setExchangeValue(BigDecimal exchangeValue) {
+	public void setExchangeRate(BigDecimal exchangeValue) {
 		this.exchangeValue = exchangeValue;
 	}
+	
+	
 
 }

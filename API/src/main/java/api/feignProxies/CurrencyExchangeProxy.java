@@ -5,12 +5,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import api.dto.CurrencyExchangeDto;
+import api.dtos.CurrencyExchangeDto;
 
 @FeignClient("currency-exchange")
 public interface CurrencyExchangeProxy {
-
+	
 	@GetMapping("/currency-exchange")
-	ResponseEntity<CurrencyExchangeDto> getExchange
-			(@RequestParam(value = "from") String from, @RequestParam(value = "to") String to);
+	ResponseEntity<CurrencyExchangeDto> getExchange(@RequestParam(value = "from") String from, @RequestParam(value = "to") String to);
+
 }

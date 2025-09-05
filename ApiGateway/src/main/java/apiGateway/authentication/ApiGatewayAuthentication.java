@@ -18,43 +18,54 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.web.client.RestTemplate;
 
-import api.dto.UserDto;
+import api.dtos.UserDto;
+
 
 @Configuration
 @EnableWebFluxSecurity
 public class ApiGatewayAuthentication {
-
 	
 	@Bean
 	SecurityWebFilterChain filterChain(ServerHttpSecurity http) {
-		http
-		.csrf(csrf -> csrf.disable())
-		.authorizeExchange(exchange -> exchange
-				.pathMatchers(HttpMethod.POST).hasRole("ADMIN")
-				.pathMatchers("/currency-exchange").permitAll()
+		http.
+		csrf(csrf -> csrf.disable())
+		.authorizeExchange(exchange -> exchange.pathMatchers("/currency-exchange").permitAll()
 				.pathMatchers("/currency-conversion").hasRole("USER")
-				.pathMatchers("/users").hasRole("ADMIN")
-				).httpBasic(Customizer.withDefaults());
+				.pathMatchers("/crypto-conversion/**").hasRole("USER")
+				.pathMatchers("/currency-conversion-feign").hasRole("USER")
+				.pathMatchers("/trade-service").hasRole("USER")
+				.pathMatchers("/bank-account").hasAnyRole("ADMIN", "USER")
+				.pathMatchers("/crypto-wallet").hasAnyRole("ADMIN", "USER")
+				.pathMatchers("/crypto-exchange").permitAll()
+				.pathMatchers("/users/**").hasAnyRole("ADMIN", "OWNER")
+				.pathMatchers(HttpMethod.POST, "/bank-account/**", "/crypto-wallet/**").hasRole("ADMIN")
+				.pathMatchers(HttpMethod.PUT, "/bank-account/**", "/crypto-wallet/**").hasRole("ADMIN")
+				.pathMatchers(HttpMethod.DELETE, "/bank-account/**", "/crypto-wallet/**").hasRole("ADMIN")
+				.pathMatchers(HttpMethod.DELETE, "/users/**").hasRole("OWNER")
+				.pathMatchers(HttpMethod.POST, "/users/**").hasAnyRole("OWNER", "ADMIN")
+				.pathMatchers(HttpMethod.PUT, "/users/**").hasAnyRole("OWNER", "ADMIN"))
+				.httpBasic(Customizer.withDefaults());
 		
 		return http.build();
 	}
 	
 	@Bean
 	MapReactiveUserDetailsService userDetailsService(BCryptPasswordEncoder encoder) {
-		ResponseEntity<List<UserDto>> response =
-				//Obratiti paznju prilikom rada sa Dockerom
-				// Bez dockera localhost:8770/users
-				// Za docker users-service:8770/users
-				new RestTemplate().exchange("http://users-service:8770/users", HttpMethod.GET,
-						null, new ParameterizedTypeReference<List<UserDto>>() {});
+		
+		// Obratiti paznju na URL prilikom dokerizacije
+		
+		ResponseEntity<List<UserDto>> response = new RestTemplate()
+				.exchange("http://localhost:8770/users", HttpMethod.GET, null, // zbog dockera se menja
+						new ParameterizedTypeReference<List<UserDto>> () {}); 
+		
 		List<UserDetails> users = new ArrayList<UserDetails>();
-		for(UserDto user : response.getBody()) {
+		for(UserDto dto : response.getBody()) {
 			users.add(
-					User.withUsername(user.getEmail())
-					.password(encoder.encode(user.getPassword()))
-					.roles(user.getRole())
-					.build());
-				
+					User.withUsername(dto.getEmail())
+					.password(encoder.encode(dto.getPassword()))
+					.roles(dto.getRole())
+					.build()
+					);
 		}
 		
 		return new MapReactiveUserDetailsService(users);
@@ -65,4 +76,5 @@ public class ApiGatewayAuthentication {
 	BCryptPasswordEncoder getEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+
 }

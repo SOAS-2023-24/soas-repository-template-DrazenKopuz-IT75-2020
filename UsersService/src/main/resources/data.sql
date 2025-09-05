@@ -1,3 +1,4 @@
-insert into user_model(id, email, password, role)
-values(1, 'admin@uns.ac.rs', 'password', 'ADMIN'),
-	  (2, 'user@uns.ac.rs', 'password', 'USER');
+insert into users(id, email, password, role)
+values  (nextval('USERS_SEQ'), 'owner@uns.ac.rs', 'password', 'OWNER'),
+		(nextval('USERS_SEQ'), 'admin@uns.ac.rs', 'password', 'ADMIN'),
+		(nextval('USERS_SEQ'), 'user@uns.ac.rs', 'password', 'USER');

@@ -1,5 +1,22 @@
-insert into currency_exchange(id, exchange_from, exchange_to, exchange_value)
-values (1, 'EUR', 'RSD', 117.5),
-	   (2, 'USD', 'RSD', 108),
-	   (3, 'CHF', 'RSD', 122),
-	   (4, 'CAD', 'RSD', 79.6);
+insert into currency_exchange(id, currency_from, currency_to, exchange_value)
+values (1, 'EUR', 'RSD', 117.0769),
+       (2, 'USD', 'RSD', 108.3443),
+       (3, 'CHF', 'RSD', 120.9597),
+       (4, 'GBP', 'RSD', 138.4706),
+       (5, 'RSD', 'EUR', 0.00854),
+       (6, 'USD', 'EUR', 0.92541),
+       (7, 'CHF', 'EUR', 1.03316),
+       (8, 'GBP', 'EUR', 1.18273),
+       (9, 'RSD', 'USD', 0.00923),
+       (10, 'EUR', 'USD', 1.0806),
+       (11, 'CHF', 'USD', 1.11644),
+       (12, 'GBP', 'USD', 1.27806),
+       (13, 'RSD', 'CHF', 0.00827),
+       (14, 'EUR', 'CHF', 0.9679),
+       (15, 'USD', 'CHF', 0.89571),
+       (16, 'GBP', 'CHF', 1.14477),
+       (17, 'RSD', 'GBP', 0.00722),
+       (18, 'EUR', 'GBP', 0.8455),
+       (19, 'USD', 'GBP', 0.78244),
+       (20, 'CHF', 'GBP', 0.87354);
+       

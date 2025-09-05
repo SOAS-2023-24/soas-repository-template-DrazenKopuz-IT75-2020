@@ -12,12 +12,14 @@ public class NoDataFoundException extends RuntimeException {
 	}
 	
 	public NoDataFoundException(String message) {
-		super(fineTuneMessage(message));
+		//super(fineTuneMessage(message));
+		super(message);
 	}
 	
-	private static String fineTuneMessage(String message) {
-		String[] decomposedMessage = message.split("\"");
-		return decomposedMessage[1];
+	/*private static String fineTuneMessage(String message) {
+		String[] decomposeMessage = message.split("\"");
+		return decomposeMessage[1];
 	}
+	*/
 
 }

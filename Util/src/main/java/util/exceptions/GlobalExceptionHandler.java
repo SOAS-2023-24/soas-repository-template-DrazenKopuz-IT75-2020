@@ -8,19 +8,26 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-
+	
 	@ExceptionHandler(MissingServletRequestParameterException.class)
-	public ResponseEntity<?> handleMissingParameter(MissingServletRequestParameterException ex){
+	public ResponseEntity<?> handleMissingParameters(MissingServletRequestParameterException ex) {
 		return ResponseEntity.status(400).body(
-				new ExceptionModel(HttpStatus.BAD_REQUEST,
-						ex.getMessage())
-				);
+			new ExceptionModel(HttpStatus.BAD_REQUEST, ex.getMessage())
+		);
 	}
 	
 	@ExceptionHandler(NoDataFoundException.class)
-	public ResponseEntity<?> handleNoDataFound(NoDataFoundException ex){
+	public ResponseEntity<?> handleNoDataFound(NoDataFoundException ex) {
 		return ResponseEntity.status(404).body(
-				new ExceptionModel(HttpStatus.NOT_FOUND, ex.getMessage())
-				);
+			new ExceptionModel(HttpStatus.NOT_FOUND, ex.getMessage())
+		);
 	}
+	
+	@ExceptionHandler(ServiceUnavailableException.class)
+	public ResponseEntity<?> handleServiceUnavailable(ServiceUnavailableException ex) {
+		return ResponseEntity.status(503).body(
+			new ExceptionModel(HttpStatus.SERVICE_UNAVAILABLE, ex.getMessage())
+		);
+	}
+
 }

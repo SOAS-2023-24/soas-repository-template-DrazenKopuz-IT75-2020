@@ -3,7 +3,7 @@ package util.exceptions;
 import org.springframework.http.HttpStatus;
 
 public class ExceptionModel {
-
+	
 	private HttpStatus status;
 	private String message;
 	
@@ -33,4 +33,5 @@ public class ExceptionModel {
 	}
 	
 	
+
 }

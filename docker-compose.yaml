@@ -2,8 +2,7 @@ version: '3.7'
 
 services:
   currency-exchange:
-    image: sephyron/currency-exchange:latest
-    mem_limit: 700m
+    image: drazenkopuz/currency-exchange:latest
     ports:
       - "8000:8000"
     networks:
@@ -14,8 +13,7 @@ services:
       EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE: http://naming-server:8761/eureka
 
   currency-conversion:
-    image: sephyron/currency-conversion:latest
-    mem_limit: 700m
+    image: drazenkopuz/currency-conversion:latest
     ports:
       - "8100:8100"
     networks:
@@ -24,10 +22,53 @@ services:
       - naming-server
     environment:
       EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE: http://naming-server:8761/eureka
+  
+  bank-account:
+    image: drazenkopuz/bank-account:latest
+    ports:
+      - "8200:8200"
+    networks:
+      - currency-network
+    depends_on:
+      - naming-server
+    environment:
+      EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE: http://naming-server:8761/eureka
+
+  crypto-exchange:
+    image: drazenkopuz/crypto-exchange:latest
+    ports:
+      - "8400:8400"
+    networks:
+      - currency-network
+    depends_on:
+      - naming-server
+    environment:
+      EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE: http://naming-server:8761/eureka
+
+  crypto-conversion:
+    image: drazenkopuz/crypto-conversion:latest
+    ports:
+      - "8500:8500"
+    networks:
+      - currency-network
+    depends_on:
+      - naming-server
+    environment:
+      EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE: http://naming-server:8761/eureka
+
+  crypto-wallet:
+    image: drazenkopuz/crypto-wallet:latest
+    ports:
+      - "8300:8300"
+    networks:
+      - currency-network
+    depends_on:
+      - naming-server
+    environment:
+      EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE: http://naming-server:8761/eureka
 
   users-service:
-    image: sephyron/users-service:latest
-    mem_limit: 700m
+    image: drazenkopuz/users-service:latest
     ports:
       - "8770:8770"
     networks:
@@ -35,11 +76,21 @@ services:
     depends_on:
       - naming-server
     environment:
-      EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE: http://naming-server:8761/eureka    
+      EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE: http://naming-server:8761/eureka
+
+  trade-service:
+    image: drazenkopuz/trade-service:latest
+    ports:
+      - "8600:8600"
+    networks:
+      - currency-network
+    depends_on:
+      - naming-server
+    environment:
+      EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE: http://naming-server:8761/eureka
 
   api-gateway:
-    image: sephyron/api-gateway:latest
-    mem_limit: 700m
+    image: drazenkopuz/api-gateway:latest
     ports:
       - "8765:8765"
     networks:
@@ -51,12 +102,11 @@ services:
       EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE: http://naming-server:8761/eureka
 
   naming-server:
-    image: sephyron/naming-server:latest
-    mem_limit: 700m
+    image: drazenkopuz/naming-server:latest
     ports:
       - "8761:8761"
     networks:
-      - currency-network        
- 
+      - currency-network
+
 networks:
   currency-network:

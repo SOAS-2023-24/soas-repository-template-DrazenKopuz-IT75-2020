@@ -227,3 +227,27 @@ Ova aplikacija omogućava razmenu fiat i kripto valuta koristeći mikroservisnu 
 - **Headers:**
   - `Authorization` - Required header for authorization.
 - **Response:** Returns the result of the conversion from the specified crypto currency to another, including the converted amount.
+
+
+## TRADE SERVICE
+
+### Trade service
+
+- **URL:** `http://localhost:8765/trade-service`
+- **Method:** `GET`
+- **Request Parameters:**
+  - `from` - The currency or crypto code to trade from.
+  - `to` - The currency or crypto code to trade to.
+  - `quantity` - The amount of the `from` currency or crypto to trade.
+- **Headers:**
+  - `Authorization` - Required header for authorization.
+- **Response:** Returns the result of the trade operation, including the traded amount and possibly additional details about the transaction.
+
+- ### Trade service Exchange
+
+- **URL:** `http://localhost:8765/trade-service`
+- **Method:** `GET`
+- **Request Parameters:**
+  - `from` - The currency or crypto code to trade from.
+  - `to` - The currency or crypto code to trade to.
+- **Response:** Returns the result of the trade operation, including the traded amount and possibly additional details about the transaction.

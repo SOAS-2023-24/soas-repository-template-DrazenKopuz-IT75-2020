@@ -50,7 +50,7 @@ Ova aplikacija omogućava razmenu fiat i kripto valuta koristeći mikroservisnu 
 
 - ## CURRENCY EXCHANGE SERVICE
 
-### Get Exchange Rate
+- ### Get Exchange Rate
 
 - **URL:** `http://localhost:8765/currency-exchange`
 - **Method:** `GET`
@@ -62,13 +62,13 @@ Ova aplikacija omogućava razmenu fiat i kripto valuta koristeći mikroservisnu 
 
 - ## BANK ACCOUNT SERVICE
 
-### Get All Bank Accounts
+- ### Get All Bank Accounts
 
 - **URL:** `http://localhost:8765/bank-account`
 - **Method:** `GET`
 - **Response:** Returns a list of all bank accounts.
 
-### Get Bank Account by Email
+- ### Get Bank Account by Email
 
 - **URL:** `http://localhost:8765/bank-account/{email}`
 - **Method:** `GET`
@@ -76,7 +76,7 @@ Ova aplikacija omogućava razmenu fiat i kripto valuta koristeći mikroservisnu 
   - `email` - The email of the user whose bank account details are to be fetched.
 - **Response:** Returns the bank account details for the specified email.
 
-### Create a New Bank Account
+- ### Create a New Bank Account
 
 - **URL:** `http://localhost:8765/bank-account`
 - **Method:** `POST`
@@ -84,7 +84,7 @@ Ova aplikacija omogućava razmenu fiat i kripto valuta koristeći mikroservisnu 
 - **Request Body:** BankAccountDto - The details of the bank account to be created.
 - **Response:** Returns the response for the bank account creation request.
 
-### Update Bank Account
+- ### Update Bank Account
 
 - **URL:** `http://localhost:8765/bank-account/{email}`
 - **Method:** `PUT`
@@ -94,7 +94,7 @@ Ova aplikacija omogućava razmenu fiat i kripto valuta koristeći mikroservisnu 
 - **Request Body:** BankAccountDto - The updated bank account details.
 - **Response:** Returns the response for the bank account update request.
 
-### Delete Bank Account
+- ### Delete Bank Account
 
 - **URL:** `http://localhost:8765/bank-account/{email}`
 - **Method:** `DELETE`
@@ -102,7 +102,7 @@ Ova aplikacija omogućava razmenu fiat i kripto valuta koristeći mikroservisnu 
   - `email` - The email of the bank account to be deleted.
 - **Response:** Deletes the bank account for the specified email.
 
-### Update Bank Account Balances
+- ### Update Bank Account Balances
 
 - **URL:** `http://localhost:8765/bank-account`
 - **Method:** `PUT`
@@ -115,9 +115,9 @@ Ova aplikacija omogućava razmenu fiat i kripto valuta koristeći mikroservisnu 
 - **Response:** Returns the response for the bank account balance update request.
 
 
-## CURRENCY CONVERSION SERVICE
+- ## CURRENCY CONVERSION SERVICE
 
-### Get Currency Conversion
+- ### Get Currency Conversion
 
 - **URL:** `http://localhost:8765/currency-conversion`
 - **Method:** `GET`
@@ -127,7 +127,7 @@ Ova aplikacija omogućava razmenu fiat i kripto valuta koristeći mikroservisnu 
   - `quantity` - The amount of source currency to be converted.
 - **Response:** Returns the currency conversion details based on the provided parameters without authorization.
 
-### Get Currency Conversion with Feign
+- ### Get Currency Conversion with Feign
 
 - **URL:** `http://localhost:8765/currency-conversion-feign`
 - **Method:** `GET`
@@ -139,9 +139,9 @@ Ova aplikacija omogućava razmenu fiat i kripto valuta koristeći mikroservisnu 
 - **Response:** Returns the currency conversion details based on the provided parameters and authorization.
 
 
-## CRYPTO WALLET SERVICE
+- ## CRYPTO WALLET SERVICE
 
-### Get All Crypto Wallets
+- ### Get All Crypto Wallets
 
 - **URL:** `http://localhost:8765/crypto-wallet`
 - **Method:** `GET`

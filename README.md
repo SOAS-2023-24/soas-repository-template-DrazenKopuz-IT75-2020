@@ -20,7 +20,7 @@ Ova aplikacija omogućava razmenu fiat i kripto valuta koristeći mikroservisnu 
 
 - **URL:** `http://localhost:8765/users/user`
 - **Method:** `GET`
-- - **Path Variables:**
+- **Path Variables:**
   - `email` - The email address associated with the crypto wallet.
 
 - ### Create a New User

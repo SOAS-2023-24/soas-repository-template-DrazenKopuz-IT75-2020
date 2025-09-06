@@ -66,6 +66,7 @@ Ova aplikacija omogućava razmenu fiat i kripto valuta koristeći mikroservisnu 
 
 - **URL:** `http://localhost:8765/bank-account`
 - **Method:** `GET`
+- **Headers:** Authorization required.
 - **Response:** Returns a list of all bank accounts.
 
 - ### Get Bank Account by Email
@@ -90,7 +91,6 @@ Ova aplikacija omogućava razmenu fiat i kripto valuta koristeći mikroservisnu 
 - **Method:** `PUT`
 - **Path Parameters:**
   - `email` - The email of the bank account to be updated.
-- **Headers:** Authorization required.
 - **Request Body:** BankAccountDto - The updated bank account details.
 - **Response:** Returns the response for the bank account update request.
 
@@ -145,6 +145,7 @@ Ova aplikacija omogućava razmenu fiat i kripto valuta koristeći mikroservisnu 
 
 - **URL:** `http://localhost:8765/crypto-wallet`
 - **Method:** `GET`
+- **Headers:** Authorization required.
 - **Response:** Returns a list of all crypto wallets.
 
 ### Get Crypto Wallet by Email

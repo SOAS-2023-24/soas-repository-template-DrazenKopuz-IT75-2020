@@ -10,7 +10,7 @@ Ova aplikacija omogućava razmenu fiat i kripto valuta koristeći mikroservisnu 
 
 
 - ## USERS SERVICE
-- 
+  
 - ### Get All Users
 
 - **URL:** `http://localhost:8765/users`
@@ -20,6 +20,8 @@ Ova aplikacija omogućava razmenu fiat i kripto valuta koristeći mikroservisnu 
 
 - **URL:** `http://localhost:8765/users/user`
 - **Method:** `GET`
+- - **Path Variables:**
+  - `email` - The email address associated with the crypto wallet.
 
 - ### Create a New User
 
@@ -44,6 +46,7 @@ Ova aplikacija omogućava razmenu fiat i kripto valuta koristeći mikroservisnu 
 - **URL:** `http://localhost:8765/users`
 - **Method:** `DELETE`
 - **Headers:** `Authorization` required.
+
 
 - ## CURRENCY EXCHANGE SERVICE
 
@@ -110,3 +113,117 @@ Ova aplikacija omogućava razmenu fiat i kripto valuta koristeći mikroservisnu 
   - `quantity` - The quantity of currency to be updated.
   - `quantityConverted` - The total amount to be updated.
 - **Response:** Returns the response for the bank account balance update request.
+
+
+## CURRENCY CONVERSION SERVICE
+
+### Get Currency Conversion
+
+- **URL:** `http://localhost:8765/currency-conversion`
+- **Method:** `GET`
+- **Request Parameters:**
+  - `from` - The currency code of the source currency.
+  - `to` - The currency code of the target currency.
+  - `quantity` - The amount of source currency to be converted.
+- **Response:** Returns the currency conversion details based on the provided parameters without authorization.
+
+### Get Currency Conversion with Feign
+
+- **URL:** `http://localhost:8765/currency-conversion-feign`
+- **Method:** `GET`
+- **Request Parameters:**
+  - `from` - The currency code of the source currency.
+  - `to` - The currency code of the target currency.
+  - `quantity` - The amount of source currency to be converted.
+- **Headers:** Authorization required.
+- **Response:** Returns the currency conversion details based on the provided parameters and authorization.
+
+
+## CRYPTO WALLET SERVICE
+
+### Get All Crypto Wallets
+
+- **URL:** `http://localhost:8765/crypto-wallet`
+- **Method:** `GET`
+- **Response:** Returns a list of all crypto wallets.
+
+### Get Crypto Wallet by Email
+
+- **URL:** `http://localhost:8765/crypto-wallet/{email}`
+- **Method:** `GET`
+- **Path Variables:**
+  - `email` - The email address associated with the crypto wallet.
+- **Response:** Returns the crypto wallet details for the specified email.
+
+### Delete Crypto Wallet
+
+- **URL:** `http://localhost:8765/crypto-wallet/{email}`
+- **Method:** `DELETE`
+- **Path Variables:**
+  - `email` - The email address associated with the crypto wallet.
+- **Response:** Deletes the crypto wallet for the specified email.
+
+### Create Crypto Wallet
+
+- **URL:** `http://localhost:8765/crypto-wallet`
+- **Method:** `POST`
+- **Headers:** Authorization required.
+- **Request Body:** `CryptoWalletDto` - Details of the crypto wallet to be created.
+- **Response:** Creates a new crypto wallet and returns the result.
+
+### Update Crypto Wallet
+
+- **URL:** `http://localhost:8765/crypto-wallet/{email}`
+- **Method:** `PUT`
+- **Path Variables:**
+  - `email` - The email address associated with the crypto wallet.
+- **Headers:** Authorization required.
+- **Request Body:** `CryptoWalletDto` - Updated details of the crypto wallet.
+- **Response:** Updates the crypto wallet for the specified email and returns the result.
+
+### Get User's Crypto Wallet
+
+- **URL:** `http://localhost:8765/crypto-wallet/user`
+- **Method:** `GET`
+- **Path Variables:**
+  - `email` - The email address associated with the crypto wallet.
+- **Headers:** Authorization required.
+- **Response:** Returns the crypto wallet details for the currently authenticated user.
+
+### Exchange Crypto
+
+- **URL:** `http://localhost:8765/crypto-wallet`
+- **Method:** `PUT`
+- **Request Parameters:**
+  - `email` - The email address associated with the crypto wallet.
+  - `from` - The crypto currency code to be updated.
+  - `to` - The crypto currency code to be updated.
+  - `quantity` - The quantity of the crypto currency to be updated.
+  - `quantityConverted` - The total amount to be updated.
+- **Response:** Exchange crypto in Crypto wallet.
+
+
+## CRYPTO EXCHANGE SERVICE
+
+### Get Crypto Exchange Rate
+
+- **URL:** `http://localhost:8765/crypto-exchange`
+- **Method:** `GET`
+- **Request Parameters:**
+  - `from` - The crypto currency code to exchange from.
+  - `to` - The crypto currency code to exchange to.
+- **Response:** Returns the exchange rate between the specified crypto currencies.
+
+## CRYPTO CONVERSION SERVICE
+
+### Get Crypto Conversion
+
+- **URL:** `http://localhost:8765/crypto-conversion`
+- **Method:** `GET`
+- **Request Parameters:**
+  - `from` - The crypto currency code to convert from.
+  - `to` - The crypto currency code to convert to.
+  - `quantity` - The amount of the `from` currency to convert.
+- **Headers:**
+  - `Authorization` - Required header for authorization.
+- **Response:** Returns the result of the conversion from the specified crypto currency to another, including the converted amount.
